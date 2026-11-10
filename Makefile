@@ -17,6 +17,7 @@ SRC     = myMalloc.c \
           myFree.c \
           myRealloc.c \
           myShowAlloc.c \
+		  global.c \
           utils.c
 
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
