@@ -9,8 +9,7 @@
 # define TINY_MAX		128
 # define SMALL_MAX		1024
 
-# define TINY_PAGES		4
-# define SMALL_PAGES	26
+# define MIN_ALLOCS		100
 
 # define TYPE_TINY		0
 # define TYPE_SMALL		1
@@ -40,7 +39,7 @@ typedef struct s_heap
 	t_zone			*tiny;
 	t_zone			*small;
 	t_zone			*large;
-}   t_heap;
+}	t_heap;
 
 _Static_assert(sizeof(t_block) % ALIGNMENT == 0, "t_block must be a multiple of 16");
 _Static_assert(sizeof(t_zone) % ALIGNMENT == 0, "t_zone must be a multiple of 16");
@@ -59,5 +58,8 @@ void	*malloc_internal(size_t size);
 void	free_internal(void *ptr);
 void	*realloc_internal(void *ptr, size_t size);
 void	show_alloc_mem_internal(void);
+
+//utils
+size_t	zone_size(size_t max_alloc);
 
 #endif

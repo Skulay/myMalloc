@@ -1,6 +1,6 @@
 #include "myMalloc.h"
 
-void    free_internal(void *ptr)
+void	free_internal(void *ptr)
 {
 
 }

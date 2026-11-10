@@ -1,6 +1,6 @@
 #include "myMalloc.h"
 
-void    *malloc_internal(size_t size)
+void	*malloc_internal(size_t size)
 {
 
 }
