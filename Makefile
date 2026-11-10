@@ -7,17 +7,17 @@ LINK    = libft_malloc.so
 
 CC      = cc
 CFLAGS  = -Wall -Wextra -Werror -fPIC
-INC     = -I include -I libft
+INC     = -I . -I libft
 
 LIBFT   = libft/libft.a
 
-SRC_DIR = src
 OBJ_DIR = obj
 
-SRC     = malloc.c \
-          free.c \
-          realloc.c \
-          show_alloc_mem.c
+SRC     = myMalloc.c \
+          myFree.c \
+          myRealloc.c \
+          myShowAlloc.c \
+          utils.c
 
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -32,7 +32,7 @@ $(NAME): $(LIBFT) $(OBJ)
 $(LIBFT): FORCE
 	make -C libft
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c include/malloc.h
+$(OBJ_DIR)/%.o: %.c myMalloc.h
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
