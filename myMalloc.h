@@ -60,6 +60,7 @@ void	*realloc_internal(void *ptr, size_t size);
 void	show_alloc_mem_internal(void);
 
 //utils
+size_t	page_size(void);
 size_t	zone_size(size_t max_alloc);
 
 #endif
