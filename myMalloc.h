@@ -78,4 +78,10 @@ size_t	zone_size(size_t max_alloc);
 int		get_type(size_t size);
 t_zone	**get_list(int type);
 
+// zone
+// -> insert_zone | mettre la zone dans la list
+// -> remove_zone | enlever la zone de la liste
+// -> create_zone | creer une nouvelle zone
+// -> ?? 		  | en fonction des besoin  
+
 #endif
