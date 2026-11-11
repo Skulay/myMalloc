@@ -73,6 +73,9 @@ void	show_alloc_mem_internal(void);
 
 //utils
 size_t	page_size(void);
+size_t	round_to_page(size_t n);
 size_t	zone_size(size_t max_alloc);
+int		get_type(size_t size);
+t_zone	**get_list(int type);
 
 #endif

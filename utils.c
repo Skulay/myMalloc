@@ -14,6 +14,11 @@ size_t	page_size(void)
 #endif
 }
 
+size_t	round_to_page(size_t n)
+{
+	
+}
+
 size_t	zone_size(size_t max_alloc)
 {
 	size_t	page;
@@ -22,4 +27,18 @@ size_t	zone_size(size_t max_alloc)
 	page = page_size();
 	need = sizeof(t_zone) + MIN_ALLOCS * (sizeof(t_block) + max_alloc);
 	return ((need + page - 1) / page * page);
+}
+
+int	get_type(size_t size)
+{
+	if (size <= TINY_MAX)
+		return (TYPE_TINY);
+	if (size <= SMALL_MAX)
+		return (TYPE_SMALL);
+	return (TYPE_LARGE);
+}
+
+t_zone	**get_list(int type)
+{
+
 }
