@@ -1,10 +1,12 @@
 #ifndef MYMALLOC_H
 # define MYMALLOC_H
 
+# include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/mman.h>
 # include <pthread.h>
+# include <stdint.h>
 
 # define TINY_MAX		128
 # define SMALL_MAX		1024
@@ -18,9 +20,19 @@
 # define ALIGNMENT		16
 # define ALIGN(size)	(((size) + ALIGNMENT - 1) & ~(ALIGNMENT - 1))
 
+# define ZONE_HDR		sizeof(t_zone) // taille header zone
+# define BLOCK_HDR		sizeof(t_block) // taille header block
+
+# define FIRST_BLOCK(z)	((t_block *)((t_zone *)(z) + 1)) // saute l'header de zone | +1 = 32octet
+# define NEXT_BLOCK(b)	((t_block *)((char *)BLOCK_DATA(b) + (b)->size)) // pas besoin de next t_block reste a 32 octet
+# define BLOCK_DATA(b)	((void *)((t_block *)(b) + 1)) // saute l'header de block
+
+# define ZONE_END(z)	((char *)(z) + (z)->size) // adresse du premier octet qui n'appatiens plus a la zone en question 
+# define MIN_SPLIT		(BLOCK_HDR + ALIGNMENT) // pour l plus petit block possible 32octet (header) + 16octet (plus petite taille alligner)
+
 typedef struct s_block
 {
-	struct s_block	*next;
+	struct s_block	*prev;
 	size_t			size;
 	size_t			user_size;   // pour show alloc mem
 	int				is_free;     // 1 = libre, 0 = occupé
