@@ -16,17 +16,18 @@ size_t	page_size(void)
 
 size_t	round_to_page(size_t n)
 {
-	
+	size_t	page;
+
+	page = page_size();
+	return ((n + page - 1) / page * page);
 }
 
 size_t	zone_size(size_t max_alloc)
 {
-	size_t	page;
 	size_t	need;
 
-	page = page_size();
-	need = sizeof(t_zone) + MIN_ALLOCS * (sizeof(t_block) + max_alloc);
-	return ((need + page - 1) / page * page);
+	need = ZONE_HDR + MIN_ALLOCS * (BLOCK_HDR + max_alloc);
+	return (round_to_page(need));
 }
 
 int	get_type(size_t size)
