@@ -41,15 +41,6 @@ int	get_type(size_t size)
 
 t_zone	**get_list(int type)
 {
-	// t_heap	g_heap = {NULL, NULL, NULL};
-
-	// typedef struct s_heap
-	// {
-	// 	t_zone			*tiny;
-	// 	t_zone			*small;
-	// 	t_zone			*large;
-	// }	t_heap;
-
 	if (type == TYPE_TINY)
 		return (&g_heap.tiny);
 	if (type == TYPE_SMALL)
