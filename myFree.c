@@ -1,5 +1,7 @@
 #include "myMalloc.h"
 
+// free et fusionner directement les block vide entreeux apres un call de free
+
 void	free_internal(void *ptr)
 {
 
