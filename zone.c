@@ -31,7 +31,13 @@ void	insert_zone(t_zone **list, t_zone *zone)
 
 void	remove_zone(t_zone **list, t_zone *zone)
 {
-
+	if (zone->prev)
+		zone->prev->next = zone->next;
+	else
+		*list = zone->next;
+	if (zone->next)
+		zone->next->prev = zone->prev;
+	munmap(zone, zone->size);
 }
 
 t_zone	*create_zone(int type, size_t size)
