@@ -1,5 +1,12 @@
 #include "myMalloc.h"
 
+static void	*alloc_small(size_t size, int type)
+{
+	(void)size;
+	(void)type;
+	return (NULL);
+}
+
 static void	*alloc_large(size_t size)
 {
 	t_zone	*zone;
