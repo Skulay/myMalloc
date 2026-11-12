@@ -27,10 +27,10 @@ void	*malloc_internal(size_t size)
 
 	if (size == 0)
 		size = 1;
-	if (sizze > SIZE_MAX - ZONE_HDR - BLOCK_HDR - pagesize() - ALIGNEMENT)
+	if (sizze > SIZE_MAX - ZONE_HDR - BLOCK_HDR - pagesize() - ALIGNMENT)
 		return (NULL);
 	type = get_type(size);
-	if (type == LARGE)
+	if (type == TYPE_LARGE)
 		return (alloc_large(size));
 	return (alloc_small(size, type));
 }

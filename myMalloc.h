@@ -64,12 +64,14 @@ void	free(void *ptr);
 void	*malloc(size_t size);
 void	*realloc(void *ptr, size_t size);
 void	show_alloc_mem(void);
+void	*calloc(size_t nmemb, size_t size);
 
 // fonction classique
 void	*malloc_internal(size_t size);
 void	free_internal(void *ptr);
 void	*realloc_internal(void *ptr, size_t size);
 void	show_alloc_mem_internal(void);
+void	*calloc_internal(size_t nmemb, size_t size);
 
 //utils
 size_t	page_size(void);

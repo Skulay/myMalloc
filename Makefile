@@ -19,6 +19,8 @@ SRC     = myMalloc.c \
           myShowAlloc.c \
 		  global.c \
 		  zone.c \
+		  block.c \
+		  myCalloc.c \
           utils.c
 
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

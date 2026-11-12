@@ -6,7 +6,7 @@ t_block *find_free_block(t_zone *zone, size_t aligned, t_zone **out)
 
 	while (zone)
 	{
-		block = FIRST_block(zone);
+		block = FIRST_BLOCK(zone);
 		while ((char *)block < ZONE_END(zone))
 		{
 			if (block->is_free && block->size >= aligned)
@@ -36,5 +36,5 @@ void split_block(t_zone *zone, t_block *block, size_t aligned)
 	block->size = aligned;
 	after = NEXT_BLOCK(new);
 	if ((char *)after < ZONE_END(zone))
-		after-prev = new;
+		after->prev = new;
 }
