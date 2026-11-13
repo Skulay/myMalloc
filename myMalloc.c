@@ -4,8 +4,8 @@ static void	*alloc_small(size_t size, int type)
 {
 	size_t	aligned;
 	size_t	max;
-	t_zone *zone;
-	t_block *block;
+	t_zone	*zone;
+	t_block	*block;
 
 	aligned = ALIGN(size);
 	block = find_free_block(*get_list(type), aligned, &zone);
@@ -22,7 +22,7 @@ static void	*alloc_small(size_t size, int type)
 	split_block(zone, block, aligned);
 	block->is_free = 0;
 	block->user_size = size;
-	return(BLOCK_DATA(block));
+	return (BLOCK_DATA(block));
 }
 
 static void	*alloc_large(size_t size)
@@ -32,7 +32,7 @@ static void	*alloc_large(size_t size)
 
 	zone = create_zone(TYPE_LARGE, round_to_page(ZONE_HDR + BLOCK_HDR + ALIGN(size)));
 	if (!zone)
-			return (NULL);
+		return (NULL);
 	block = FIRST_BLOCK(zone);
 	block->is_free = 0;
 	block->user_size = size;

@@ -1,16 +1,9 @@
 #include "myMalloc.h"
 
-// -> insert_zone | mettre la zone dans la list
-// -> remove_zone | enlever la zone de la liste
-// -> create_zone | creer une nouvelle zone
-// -> ?? 		  | en fonction des besoin  
-
-
-
 void	insert_zone(t_zone **list, t_zone *zone)
 {
-	t_zone *prev;
-	t_zone *cur;
+	t_zone	*prev;
+	t_zone	*cur;
 
 	prev = NULL;
 	cur = *list;
@@ -43,7 +36,7 @@ void	remove_zone(t_zone **list, t_zone *zone)
 t_zone	*create_zone(int type, size_t size)
 {
 	t_zone	*zone;
-	t_block *first;
+	t_block	*first;
 
 	// NULL = adresse auto | lecture+écriture | privée, sans fichier, remplie de 0 | fd -1, offset 0 | erreur = MAP_FAILED
 	zone = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
