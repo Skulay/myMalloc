@@ -1,17 +1,23 @@
 #include "myMalloc.h"
 
-// a finir quand malloc rseras finis mais ca devrait ressembler a ce delire
+void	*calloc_internal(size_t nmemb, size_t size)
+{
+	void	*ptr;
 
-// void	calloc_internal(size_t nmemb, size_t size)
-// {
-// 	malloc_internal(ptr);
-// 	bzero(ptr);
-// 	return (ptr);
-// }
+	if (nmemb != 0 && size > SIZE_MAX / nmemb)
+		return (NULL);
+	ptr = malloc_internal(nmemb * size);
+	if (ptr)
+		ft_bzero(ptr, nmemb * size);
+	return (ptr);
+}
 
 void	*calloc(size_t nmemb, size_t size)
 {
+	void	*ret;
+
 	pthread_mutex_lock(&g_mutex);
-	calloc_internal(nmemb, size);
+	ret = calloc_internal(nmemb, size);
 	pthread_mutex_unlock(&g_mutex);
+	return (ret);
 }
