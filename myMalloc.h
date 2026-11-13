@@ -84,6 +84,11 @@ t_zone	**get_list(int type);
 void	insert_zone(t_zone **list, t_zone *zone);
 void	remove_zone(t_zone **list, t_zone *zone);
 t_zone	*create_zone(int type, size_t size);
-// -> ?? 		  | en fonction des besoin  
+
+// block
+t_block	*find_free_block(t_zone *zone, size_t aligned, t_zone **out);
+void	split_block(t_zone *zone, t_block *block, size_t aligned);
+t_block	*find_block(void *ptr, t_zone **out);
+void	merge_with_next(t_zone *zone, t_block *block);
 
 #endif
