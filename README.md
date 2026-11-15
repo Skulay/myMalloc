@@ -20,9 +20,7 @@ Une fonction publique par fichier, et les outils internes sont rangés par thèm
 	├── zone.c
 	├── block.c
 	├── utils.c
-	├── libft/
-	└── test/
-		└── main.c
+	└── libft/
 
 ## Fonctionnement
 
@@ -117,10 +115,12 @@ Pour voir l'état de la mémoire depuis un programme, déclarer puis appeler:
 
 ## Tests
 
-`test/main.c` regroupe tous les tests: allocations simples, alignement, réutilisation après free, realloc, calloc, pointeurs invalides, tailles trop grandes, show_alloc_mem, stress et threads.
+Compiler un programme de test avec la bibliothèque (et la libft si besoin):
 
-	cc test/main.c -I libft libft/libft.a -L. -lft_malloc -pthread -o tester
+	cc main.c -I libft libft/libft.a -L. -lft_malloc -pthread -o tester
 	LD_LIBRARY_PATH=. ./tester
+
+Points à vérifier: allocations simples, alignement, réutilisation après free, realloc, calloc, pointeurs invalides, tailles trop grandes, show_alloc_mem, stress et threads.
 
 Voir les appels système faits par l'allocateur:
 
