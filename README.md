@@ -126,6 +126,69 @@ Voir les appels système faits par l'allocateur:
 
 	LD_LIBRARY_PATH=. strace -e trace=mmap,munmap ./tester
 
+## Commandes pour l'évaluation
+
+### Makefile
+Compiler, puis vérifier le nom de la bibliothèque et le lien symbolique:
+
+	make
+	ls -l libft_malloc*
+
+Relancer make ne doit rien recompiler (pas de relink):
+
+	make
+
+Le nom doit suivre la variable HOSTTYPE:
+
+	export HOSTTYPE=Testing
+	make re
+	ls -l libft_malloc*
+	unset HOSTTYPE
+	make re
+
+### Symboles
+Fonctions exportées par la bibliothèque (malloc, free, realloc, calloc, show_alloc_mem doivent apparaître):
+
+	nm -D libft_malloc.so | grep " T "
+
+Fonctions externes utilisées (seulement mmap, munmap, sysconf, write et pthread_mutex_*):
+
+	nm -u libft_malloc.so
+
+Variables globales (une pour les zones, une pour le mutex):
+
+	nm libft_malloc.so | grep -i " [bd] "
+
+### Remplacer le malloc d'un programme
+Lancer n'importe quel programme avec ce malloc:
+
+	LD_LIBRARY_PATH=. LD_PRELOAD=./libft_malloc.so ls -la
+	LD_LIBRARY_PATH=. LD_PRELOAD=./libft_malloc.so ls -laR /usr/include > /dev/null
+	LD_LIBRARY_PATH=. LD_PRELOAD=./libft_malloc.so bash -c 'echo bonjour'
+
+Ou pour toute une session de terminal (à quitter avec exit):
+
+	LD_LIBRARY_PATH=. LD_PRELOAD=./libft_malloc.so bash
+
+### Pages mémoire
+Comparer le nombre de pages réclamées entre plusieurs programmes de test (ligne "Minor (reclaiming a frame) page faults"):
+
+	/usr/bin/time -v ./tester
+
+Avec la bibliothèque préchargée:
+
+	LD_LIBRARY_PATH=. LD_PRELOAD=./libft_malloc.so /usr/bin/time -v ./tester
+
+### Appels système
+Compter les mmap et munmap faits par l'allocateur:
+
+	LD_LIBRARY_PATH=. strace -e trace=mmap,munmap ./tester
+	LD_LIBRARY_PATH=. strace -c -e trace=mmap,munmap ./tester
+
+### Nettoyage
+
+	make fclean
+
 ## Notes
 
 - Seuls `mmap`, `munmap`, `sysconf` (ou `getpagesize` sous macOS) et les fonctions de la libft sont utilisés.
