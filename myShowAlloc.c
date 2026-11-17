@@ -8,10 +8,10 @@ static void	put_addr(void *ptr)
 
 static size_t	print_zone(t_zone *zone)
 {
-	static char	*names[3] = {"TINY : ", "SMALL : ", "LARGE : "};
-	t_block		*block;
-	char		*start;
-	size_t		total;
+	char	*names[3] = {"TINY : ", "SMALL : ", "LARGE : "};
+	t_block	*block;
+	char	*start;
+	size_t	total;
 
 	ft_putstr_fd(names[zone->type], 1);
 	put_addr(zone);
